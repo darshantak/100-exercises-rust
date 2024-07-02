@@ -1,16 +1,21 @@
-// Rewrite the factorial function using a `for` loop.
 pub fn factorial(n: u32) -> u32 {
-    // todo!()
-    let mut fact = 1;
+    let mut result = 1;
     for i in 1..=n {
-        fact= fact*i;
+        // Use saturating multiplication to stop at the maximum value of u32
+        // rather than overflowing and wrapping around
+        result *= i;
     }
-    fact
+    result
 }
 
 #[cfg(test)]
 mod tests {
     use crate::factorial;
+
+    #[test]
+    fn twentieth() {
+        assert_eq!(factorial(20), u32::MAX);
+    }
 
     #[test]
     fn first() {
